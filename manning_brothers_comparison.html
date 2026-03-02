@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peyton vs Eli Manning</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:      #F6F4EF;
+    --white:   #FFFFFF;
+    --rule:    #E0DDD5;
+    --text:    #1A1814;
+    --dim:     #8A8680;
+    --peyton:  #003B7A;
+    --peyton-l:#E8EEF8;
+    --eli-a:   #CC0000;
+    --eli-l:   #F0E8E8;
+    --eli:     #0B2265;
+    --bar-bg:  #E4E0D8;
+    --gold:    #C9A020;
+  }
+  html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px 36px; }
+
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+  h1 { font-family: 'Oswald', sans-serif; font-size: clamp(26px, 6vw, 44px); font-weight: 700; text-transform: uppercase; line-height: 1; }
+  .peyton-name { color: var(--peyton); }
+  .vs { color: var(--rule); font-weight: 400; margin: 0 4px; }
+  .eli-name { color: var(--eli-a); }
+  .sub { font-size: 12px; color: var(--dim); margin-top: 4px; }
+  .rule { height: 3px; background: linear-gradient(90deg, var(--peyton), var(--eli-a)); border-radius: 2px; margin: 14px 0 20px; }
+
+  /* PILLS */
+  .player-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 0; }
+  .pill { padding: 10px 14px; }
+  .pill.peyton { background: var(--peyton); border-radius: 6px 0 0 0; }
+  .pill.eli    { background: var(--eli);    border-radius: 0 6px 0 0; }
+  .pill-name   { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; color: #fff; line-height: 1; }
+  .pill-detail { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 3px; }
+
+  /* TABLE */
+  .stats-wrap { background: var(--white); border: 1px solid var(--rule); border-radius: 0 0 8px 8px; overflow: hidden; }
+  .stat-row { display: grid; grid-template-columns: 1fr 100px 1fr; border-bottom: 1px solid var(--rule); }
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-cell { padding: 10px 14px; }
+  .stat-cell.pc { background: var(--peyton-l); }
+  .stat-cell.ec { background: var(--eli-l); text-align: right; }
+
+  .stat-mid {
+    padding: 10px 6px; background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-left: 1px solid var(--rule); border-right: 1px solid var(--rule);
+  }
+  .mid-label { font-family: 'DM Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); text-align: center; line-height: 1.5; }
+
+  .stat-val { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; line-height: 1; }
+  .pc .stat-val { color: var(--peyton); }
+  .ec .stat-val { color: var(--eli-a); }
+  .stat-sub { font-size: 10px; color: var(--dim); margin-top: 2px; line-height: 1.3; }
+
+  /* MINI BAR */
+  .bar-track { height: 3px; background: var(--bar-bg); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+  .bar-fill-p { height: 100%; border-radius: 2px; background: var(--peyton); }
+  .bar-fill-e { height: 100%; border-radius: 2px; background: var(--eli-a); }
+  .ec .bar-track { direction: rtl; }
+
+  /* SB ROW */
+  .sb-row { display: grid; grid-template-columns: 1fr 100px 1fr; border-top: 2px solid var(--gold); }
+  .sb-cell { padding: 10px 14px; }
+  .sb-cell.p { background: var(--peyton-l); }
+  .sb-cell.e { background: var(--eli-l); text-align: right; }
+  .sb-mid { padding: 10px 6px; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+  .sb-val { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; line-height: 1; }
+  .sb-cell.p .sb-val { color: var(--peyton); }
+  .sb-cell.e .sb-val { color: var(--eli-a); }
+  .sb-sub { font-size: 10px; color: var(--dim); margin-top: 3px; line-height: 1.4; }
+  .sb-label { font-family: 'DM Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-align: center; line-height: 1.5; }
+
+  /* FOOTNOTE */
+  .footnote { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; padding-top: 12px; border-top: 1px solid var(--rule); }
+  .fn-text  { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--dim); }
+  .fn-badge { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--rule); color: var(--dim); padding: 3px 8px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">NFL Career Statistics Comparison</div>
+  <h1><span class="peyton-name">Peyton</span> <span class="vs">vs</span> <span class="eli-name">Eli</span></h1>
+  <div class="sub">Manning Brothers · Regular Season Career Stats · Both Hall of Fame</div>
+  <div class="rule"></div>
+
+  <div class="player-pills">
+    <div class="pill peyton">
+      <div class="pill-name">Peyton Manning</div>
+      <div class="pill-detail">IND 1998–2011 · DEN 2012–15 · HOF 2021</div>
+    </div>
+    <div class="pill eli">
+      <div class="pill-name">Eli Manning</div>
+      <div class="pill-detail">NYG 2004–2019 · HOF 2023</div>
+    </div>
+  </div>
+
+  <div class="stats-wrap">
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">71,940</div>
+        <div class="stat-sub">8th all-time</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Passing<br>Yards</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">57,023</div>
+        <div class="stat-sub">11th all-time</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:79%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">539</div>
+        <div class="stat-sub">3rd all-time</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Passing<br>TDs</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">366</div>
+        <div class="stat-sub">11th all-time</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:68%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">251</div>
+        <div class="stat-sub">2.7% INT rate</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Inter-<br>ceptions</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">244</div>
+        <div class="stat-sub">Led NFL in INTs 3×</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:97%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">64.9%</div>
+        <div class="stat-sub">9,380 attempts</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Comp.<br>Pct.</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">58.4%</div>
+        <div class="stat-sub">8,119 attempts</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:90%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">96.5</div>
+        <div class="stat-sub">Top-10 all-time</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Passer<br>Rating</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">84.1</div>
+        <div class="stat-sub">Career average</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:85%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">14×</div>
+        <div class="stat-sub">NFL record at retirement</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Pro<br>Bowls</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">4×</div>
+        <div class="stat-sub">2008, 2011, 2012, 2015</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:29%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">5×</div>
+        <div class="stat-sub">NFL record</div>
+        <div class="bar-track"><div class="bar-fill-p" style="width:100%"></div></div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">NFL<br>MVP</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">0×</div>
+        <div class="stat-sub">Never won reg. season MVP</div>
+        <div class="bar-track"><div class="bar-fill-e" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-cell pc">
+        <div class="stat-val">14–13</div>
+        <div class="stat-sub">Below .500 in playoffs</div>
+      </div>
+      <div class="stat-mid"><div class="mid-label">Playoff<br>Record</div></div>
+      <div class="stat-cell ec">
+        <div class="stat-val">8–4</div>
+        <div class="stat-sub">67% win rate</div>
+      </div>
+    </div>
+
+    <div class="sb-row">
+      <div class="sb-cell p">
+        <div class="sb-val">2 Rings</div>
+        <div class="sb-sub">SB XLI MVP · SB 50<br>Lost SB XLII + XLVIII</div>
+      </div>
+      <div class="sb-mid"><div class="sb-label">Super<br>Bowl</div></div>
+      <div class="sb-cell e">
+        <div class="sb-val">2 Rings</div>
+        <div class="sb-sub">2× SB MVP<br>XLII + XLVI · Undefeated</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footnote">
+    <div class="fn-text">Regular season stats via Pro Football Reference · Hall of Fame inductees</div>
+    <div class="fn-badge">github.com/lindseyh251/My-Data-Science-Portfolio</div>
+  </div>
+
+</div>
+</body>
+</html>
