@@ -1,4 +1,4 @@
-Hi, I’m Lindsey!
+Hi, I’m Lindsey! ⭐
 
 I recently earned my Master’s degree in Applied Statistics, Data Analytics, and Data Science from the University of Kansas Medical Center and hold a Bachelor’s degree in Chemistry from Creighton University.
 
