@@ -6,8 +6,6 @@ While that academic path might not immediately scream “sports analytics,” I 
 
 This repository highlights my independent sports analytics projects, featuring statistical analysis, data visualization, and data-driven storytelling across professional and collegiate athletics.
 
-My work combines advanced metrics, modeling, and meaningful insights to uncover trends, contextualize performance, and translate complex data into compelling sports narratives.
-
 Through these projects, I demonstrate my ability to research, analyze, and communicate sports insights in a way that is both analytically rigorous and engaging for fans and decision-makers alike.
 
 I hope you enjoy exploring them!
