@@ -14,6 +14,3 @@ communicate sports insights in a way that is both analytically rigorous and enga
 
 I hope you enjoy exploring!
 
-Lindsey Hornberger 
-ljvbcllh@gmail.com
-(785) 979-0956
