@@ -13,3 +13,7 @@ Through this work, I demonstrate my ability to uncover meaningful trends, contex
 communicate sports insights in a way that is both analytically rigorous and engaging for fans and decision-makers alike.
 
 I hope you enjoy exploring!
+
+Lindsey Hornberger 
+ljvbcllh@gmail.com
+(785) 979-0956
